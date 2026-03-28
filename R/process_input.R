@@ -184,7 +184,7 @@ add_extra_tables_input <- function(db) {
 
   # Create table with all the tags
   rplexos_message("Creating tag table")
-  if ((db, "t_tag")) {
+  if (DBI::dbExistsTable(db, "t_tag")) {
     # Query and reformat the data
     sql <- "CREATE VIEW [temp_tag] AS
             SELECT t.data_id, o.category, o.class, o.name
@@ -219,7 +219,7 @@ add_extra_tables_input <- function(db) {
 
   # Create table with data text entries
   rplexos_message("Creating text table")
-  if ((db, "t_text")) {
+  if (DBI::dbExistsTable(db, "t_text")) {
     # Query and reformat the data
     sql <- "CREATE VIEW [temp_text] AS
             SELECT t.data_id, c.name class, t.value
@@ -253,7 +253,7 @@ add_extra_tables_input <- function(db) {
   DBI::dbWriteTable(db, "table_text", text.table, row.names = FALSE)
 
   # Add t_memo_data if it doesn't exist
-  if (!(db, "t_memo_data")) {
+  if (!DBI::dbExistsTable(db, "t_memo_data")) {
     rplexos_message("Adding t_memo_data")
     memo.table <- data.frame(data_id = integer(0),
                              value = character(0))
@@ -261,7 +261,7 @@ add_extra_tables_input <- function(db) {
   }
 
   # Add t_band if it doesn't exist
-  if (!(db, "t_band")) {
+  if (!DBI::dbExistsTable(db, "t_band")) {
     rplexos_message("Adding t_band")
     band.table <- data.frame(data_id = integer(0),
                              band_id = integer(0))
@@ -269,7 +269,7 @@ add_extra_tables_input <- function(db) {
   }
 
   # Add t_date_from if it doesn't exist
-  if (!(db, "t_date_from")) {
+  if (!DBI::dbExistsTable(db, "t_date_from")) {
     rplexos_message("Adding t_date_from")
     datefrom.table <- data.frame(data_id = integer(0),
                                  date = character(0))
@@ -277,7 +277,7 @@ add_extra_tables_input <- function(db) {
   }
 
   # Add t_date_to if it doesn't exist
-  if (!(db, "t_date_to")) {
+  if (!DBI::dbExistsTable(db, "t_date_to")) {
     rplexos_message("Adding t_date_to")
     dateto.table <- data.frame(data_id = integer(0),
                                date = character(0))
