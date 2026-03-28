@@ -151,7 +151,9 @@ add_extra_tables_input <- function(db) {
 
   # View with memberships, collection, parent and child objects
   col.table <- tbl(db, "t_collection")
-  if ("complement_name" %in% col.table$select) {
+  
+  # Use colnames() to get the column names of the lazy table
+  if ("complement_name" %in% colnames(col.table)) {
     txt.comp <- "c.complement_name"
   } else {
     txt.comp <- ""
