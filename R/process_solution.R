@@ -760,7 +760,7 @@ correct_length <- function(db, p) {
 
   # This case is
   warning("Problem with length of 't_key_index' for period ", p, "\n",
-          "in file '", dbGetInfo(db)$dbname, "'",
+          "in file '", DBI::dbGetInfo(db)$dbname, "'",
           call. = FALSE, immediate. = TRUE)
 
   TRUE
