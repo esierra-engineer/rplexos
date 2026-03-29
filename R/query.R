@@ -759,5 +759,5 @@ select_rplexos <- function(x, columns, add.key) {
     as.list %>%
     lapply(as.symbol)
 
-  select_(x, .dots = columns.dots)
+  select(x, .dots = columns.dots)
 }
