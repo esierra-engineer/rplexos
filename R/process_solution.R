@@ -378,10 +378,9 @@ add_data <- function(file, dbt=NULL, dbf=NULL, add_tables='add_all', initial = T
       
       # Check the size of data (they won't match if there is a problem)
       if (length(value.data) < nrow(tdata)) {
-        rplexos_message("   ", num.read, " values read")
-        stop("Problem reading ", period.name, " binary data (reached end of file).\n",
-             "  ", nrow(tdata), " values requested, ", length(value.data), " returned.\n",
-             "  This is likely a bug in rplexos. Please report it.", call. = FALSE)
+        warning("truncation detected in ", period.name, ". padding with NAs.", call. = FALSE)
+        v_miss <- nrow(tdata) - length(value.data)
+        value.data <- c(value.data, rep(NA_real_, v_miss))
       }
       
       # Copy data
